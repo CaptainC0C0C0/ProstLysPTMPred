@@ -15,22 +15,25 @@
 
 ---
 
-## 项目最终结构（运行全部需求代码后）
+## 项目最终结构
+
+```bash
 ProstLysPTMPred/
-├── Fused_ProstT5_MLPSTAAP_Physchem/      # 特征融合结果
-├── Balanced_MDNDO_NCR_CC/                # 最终平衡数据集
-├── Final_Models/                         # 训练好的模型
-├── shap_results/                         # SHAP 可解释性分析结果
-├── Under/                                # NCR & ClusterCentroids 模块
-├── Train Dataset/                        # 训练集原始数据
-├── Test Dataset/                         # 测试集原始数据
-├── evaluation_indicators/                # 评估指标模块
+├── Fused_ProstT5_MLPSTAAP_Physchem/          # 特征融合结果
+├── Balanced_MDNDO_NCR_CC/                    # 最终平衡数据集
+├── Final_Models/                             # 训练好的模型（必须保留）
+├── shap_results/                             # SHAP 可解释性分析结果
+├── Under/                                    # NCR & ClusterCentroids 模块
+├── Train Dataset/                            # 训练集原始数据
+├── Test Dataset/                             # 测试集原始数据
+├── evaluation_indicators/                    # 评估指标模块
 ├── Feature_Extraction_and_Fusion.py
 ├── MDNDO_NCRCC.py
 ├── LightGBM_based_Classifier_and_SHAP_Analysis.py
-├── Predictor.py                          # 图形化预测器（可单独运行）
+├── Predictor.py                              # 图形化预测器（可单独运行）
 ├── requirements.txt
 └── README.md
+```
 
 ## 快速安装
 
@@ -54,3 +57,21 @@ pip install --upgrade pip
 
 # 4. 安装依赖
 pip install -r requirements.txt
+```
+
+## 使用流程
+
+方式一：直接使用预测器（推荐大多数用户）
+```bash
+python Predictor.py
+```
+方式二：从头完整训练（可选）
+```bash
+# 1. 特征融合
+python Feature_Extraction_and_Fusion.py
+
+# 2. 数据采样平衡
+python MDNDO_NCRCC.py
+
+# 3. 模型训练 + SHAP 分析
+python LightGBM_based_Classifier_and_SHAP_Analysis.py
